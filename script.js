@@ -172,6 +172,14 @@ const playBingo = () => {
       playBingo();
     } else alert(`Thanks for Visiting!`);
   };
+  
+   const sortByPoints = () => {
+    players.sort(function (a, b) {
+      return a.points - b.points;
+    });
+    return players;
+  };
+  
 
   const message = `Hi players, Everyone starts with 500 points,
   and if you enter a round without matches, you will lose 5 points.
@@ -183,6 +191,7 @@ const playBingo = () => {
   bingoCard = showCard();
   playAgain();
   pointsSystem();
+  sortByPoints();
   console.table(players);
   playNext();
 };
