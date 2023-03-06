@@ -102,8 +102,10 @@ const playBingo = () => {
       let result = showNumber();
       return result;
     } else {
-      alert("Game over");
-      return;
+      pointsSystem();
+      sortByPoints();
+      console.table(players);
+      playAgain();
     }
   };
 
