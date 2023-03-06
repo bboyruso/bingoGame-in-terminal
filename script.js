@@ -72,7 +72,6 @@ const playBingo = () => {
     let question = window.confirm(`Do you like this card?`);
     if (question) {
     } else {
-      console.log(333);
       bingoCard = showCard();
     }
     return bingoCard;
