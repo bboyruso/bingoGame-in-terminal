@@ -1,11 +1,11 @@
 const players = [
   {
     name: "John",
-    points: 325,
+    points: 45,
   },
   {
     name: "Xavi99",
-    points: 215,
+    points: 15,
   },
 ];
 
