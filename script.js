@@ -1,7 +1,7 @@
-const players = [
+let players = [
   {
     name: "John",
-    points: 45,
+    points: 40,
   },
   {
     name: "Xavi99",
@@ -11,36 +11,11 @@ const players = [
 
 const playBingo = () => {
   let rounds = 0;
-
   const randomNumber = () => {
     const min = 1;
     const max = 99;
     const number = Math.floor(Math.random() * (max - min + 1) + min);
     return number;
-  };
-
-  const alertCard = () => {
-    console.table(
-      bingoCard[0],
-      bingoCard[1],
-      bingoCard[2],
-      bingoCard[3],
-      bingoCard[4]
-    );
-    console.table(
-      bingoCard[5],
-      bingoCard[6],
-      bingoCard[7],
-      bingoCard[8],
-      bingoCard[9]
-    );
-    console.table(
-      bingoCard[10],
-      bingoCard[11],
-      bingoCard[12],
-      bingoCard[13],
-      bingoCard[14]
-    );
   };
 
   const sayLine = (firsIndex, lastIndex) => {
@@ -58,26 +33,48 @@ const playBingo = () => {
 
   const showCard = () => {
     let bingoCard = [];
+    const alertCard = () => {
+      console.table(
+        bingoCard[0],
+        bingoCard[1],
+        bingoCard[2],
+        bingoCard[3],
+        bingoCard[4]
+      );
+      console.table(
+        bingoCard[5],
+        bingoCard[6],
+        bingoCard[7],
+        bingoCard[8],
+        bingoCard[9]
+      );
+      console.table(
+        bingoCard[10],
+        bingoCard[11],
+        bingoCard[12],
+        bingoCard[13],
+        bingoCard[14]
+      );
+    };
     for (let i = 0; i < 15; i++) {
       const number = randomNumber();
       if (bingoCard.includes(number)) {
         i--;
       } else bingoCard.push(number);
     }
+
     bingoCard = bingoCard.sort((a, b) => {
       return a - b;
     });
 
-    const cards = bingoCard.join(" ");
-    console.table(`Showing card: \n ${cards}.`);
-    let question = window.confirm(
-      `Showing card : \n ${cards}. \nDo you like this numbers?`
-    );
+    alertCard();
 
+    let question = window.confirm(`Do you like this card?`);
     if (question) {
-      console.table(`Your card is: \n ${cards}.`);
-      return bingoCard;
-    } else showCard();
+    } else {
+      console.log(333);
+      bingoCard = showCard();
+    }
     return bingoCard;
   };
 
@@ -90,7 +87,6 @@ const playBingo = () => {
     } else {
       bingoNumber.push(number);
       const message = `The number is : ${number}`;
-      alert(message);
       console.log(message);
       return number;
     }
@@ -98,15 +94,12 @@ const playBingo = () => {
 
   const nextRound = () => {
     const question = window.confirm("Show Number?");
-    if (question) {
-      let result = showNumber();
-      return result;
-    } else {
-      pointsSystem();
-      sortByPoints();
-      console.table(players);
-      playAgain();
+    let result = showNumber();
+    if (!question) {
+      return playAgain();
     }
+
+    return result;
   };
 
   const askForName = () => {
@@ -134,7 +127,10 @@ const playBingo = () => {
     }
   };
 
-  const playAgain = () => {
+  let firstLine = 0;
+  let secondLine = 0;
+
+  const playNextRound = () => {
     const findNumber = (element) => typeof element === "number";
     const isNumber = bingoCard.some(findNumber);
     let totalCounter1 = sayLine(0, 5);
@@ -143,21 +139,28 @@ const playBingo = () => {
 
     let total = totalCounter1 + totalCounter2 + totalCounter3;
 
-    switch (total) {
-      case 5:
-        console.log("1 LINE is done!!!");
-        break;
-      case 10:
-        console.log("2 LiNES are done!!!");
-        break;
+    if (firstLine === 0) {
+      switch (total) {
+        case 5:
+          firstLine++;
+          console.log("LINE!!!");
+          break;
+      }
+    }
+    if (secondLine === 0) {
+      switch (total) {
+        case 10:
+          secondLine++;
+          console.log("LiNE!!!");
+          break;
+      }
     }
 
     if (isNumber) {
       rounds++;
       result = nextRound();
       bingoCard = checkNumber();
-      alert(bingoCard.join(" "));
-      playAgain();
+      playNextRound();
     } else if (total === 15) {
       console.log("BINGO!!!");
     }
@@ -168,20 +171,13 @@ const playBingo = () => {
     players[players.length - 1].points = userPoints;
   };
 
-  const playNext = () => {
-    const message = window.confirm("Do you want to play again?");
-    if (message) {
-      playBingo();
-    } else alert(`Thanks for Visiting!`);
-  };
-  
-   const sortByPoints = () => {
+  const sortByPoints = () => {
     players.sort(function (a, b) {
       return a.points - b.points;
     });
+
     return players;
   };
-  
 
   const message = `Hi players, Everyone starts with 500 points,
   and if you enter a round without matches, you will lose 5 points.
@@ -191,11 +187,41 @@ const playBingo = () => {
   console.log(message);
   askForName();
   bingoCard = showCard();
-  playAgain();
+  playNextRound();
   pointsSystem();
   sortByPoints();
   console.table(players);
-  playNext();
+  playAgain();
 };
-
+const playAgain = () => {
+  const message = window.confirm("Do you want to play again?");
+  if (message) {
+    playBingo();
+  } else alert(`Thanks for Visiting!`);
+  playBingo();
+};
+let bingoCard = [];
+const alertCard = () => {
+  console.table(
+    bingoCard[0],
+    bingoCard[1],
+    bingoCard[2],
+    bingoCard[3],
+    bingoCard[4]
+  );
+  console.table(
+    bingoCard[5],
+    bingoCard[6],
+    bingoCard[7],
+    bingoCard[8],
+    bingoCard[9]
+  );
+  console.table(
+    bingoCard[10],
+    bingoCard[11],
+    bingoCard[12],
+    bingoCard[13],
+    bingoCard[14]
+  );
+};
 playBingo();
