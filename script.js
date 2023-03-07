@@ -13,7 +13,7 @@ const playBingo = () => {
   let rounds = 0;
   const randomNumber = () => {
     const min = 1;
-    const max = 18;
+    const max = 99;
     const number = Math.floor(Math.random() * (max - min + 1) + min);
     return number;
   };
