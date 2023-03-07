@@ -13,7 +13,7 @@ const playBingo = () => {
   let rounds = 0;
   const randomNumber = () => {
     const min = 1;
-    const max = 99;
+    const max = 18;
     const number = Math.floor(Math.random() * (max - min + 1) + min);
     return number;
   };
@@ -33,29 +33,7 @@ const playBingo = () => {
 
   const showCard = () => {
     let bingoCard = [];
-    const alertCard = () => {
-      console.table(
-        bingoCard[0],
-        bingoCard[1],
-        bingoCard[2],
-        bingoCard[3],
-        bingoCard[4]
-      );
-      console.table(
-        bingoCard[5],
-        bingoCard[6],
-        bingoCard[7],
-        bingoCard[8],
-        bingoCard[9]
-      );
-      console.table(
-        bingoCard[10],
-        bingoCard[11],
-        bingoCard[12],
-        bingoCard[13],
-        bingoCard[14]
-      );
-    };
+
     for (let i = 0; i < 15; i++) {
       const number = randomNumber();
       if (bingoCard.includes(number)) {
@@ -67,7 +45,7 @@ const playBingo = () => {
       return a - b;
     });
 
-    alertCard();
+    alertCard(bingoCard);
 
     let question = window.confirm(`Do you like this card?`);
     if (question) {
@@ -117,11 +95,11 @@ const playBingo = () => {
     if (findIndex >= 0) {
       bingoCard.splice(findIndex, 1, "X");
       console.log("Yes !!! There is the matches!!!");
-      alertCard();
+      alertCard(bingoCard);
       return bingoCard;
     } else {
       console.log("NO matches!!!");
-      alertCard();
+      alertCard(bingoCard);
       return bingoCard;
     }
   };
@@ -190,28 +168,10 @@ const playAgain = () => {
   } else alert(`Thanks for Visiting!`);
   playBingo();
 };
-let bingoCard = [];
-const alertCard = () => {
-  console.table(
-    bingoCard[0],
-    bingoCard[1],
-    bingoCard[2],
-    bingoCard[3],
-    bingoCard[4]
-  );
-  console.table(
-    bingoCard[5],
-    bingoCard[6],
-    bingoCard[7],
-    bingoCard[8],
-    bingoCard[9]
-  );
-  console.table(
-    bingoCard[10],
-    bingoCard[11],
-    bingoCard[12],
-    bingoCard[13],
-    bingoCard[14]
-  );
+
+const alertCard = (array) => {
+  console.table(array[0], array[1], array[2], array[3], array[4]);
+  console.table(array[5], array[6], array[7], array[8], array[9]);
+  console.table(array[10], array[11], array[12], array[13], array[14]);
 };
 playBingo();
