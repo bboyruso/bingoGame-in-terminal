@@ -75,7 +75,6 @@ const playBingo = () => {
     if (!question) {
       return playAgain();
     }
-
     return result;
   };
 
