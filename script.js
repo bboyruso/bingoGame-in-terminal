@@ -127,7 +127,6 @@ const playBingo = () => {
   };
 
   let firstLine = 0;
-  let secondLine = 0;
 
   const playNextRound = () => {
     const findNumber = (element) => typeof element === "number";
@@ -143,14 +142,6 @@ const playBingo = () => {
         case 5:
           firstLine++;
           console.log("LINE!!!");
-          break;
-      }
-    }
-    if (secondLine === 0) {
-      switch (total) {
-        case 10:
-          secondLine++;
-          console.log("LiNE!!!");
           break;
       }
     }
