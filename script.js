@@ -113,14 +113,10 @@ const playBingo = () => {
     let totalCounter2 = sayLine(5, 10);
     let totalCounter3 = sayLine(10, 15);
 
-    let total = totalCounter1 + totalCounter2 + totalCounter3;
-
     if (firstLine === 0) {
-      switch (total) {
-        case 5:
-          firstLine++;
-          console.log("LINE!!!");
-          break;
+      if (totalCounter1 || totalCounter2 || totalCounter3 === 5) {
+        firstLine++;
+        console.log("LINE!!!");
       }
     }
 
@@ -129,7 +125,7 @@ const playBingo = () => {
       result = nextRound();
       bingoCard = checkNumber();
       playNextRound();
-    } else if (total === 15) {
+    } else {
       console.log("BINGO!!!");
     }
   };
@@ -161,6 +157,7 @@ const playBingo = () => {
   console.table(players);
   playAgain();
 };
+
 const playAgain = () => {
   const message = window.confirm("Do you want to play again?");
   if (message) {
@@ -174,4 +171,5 @@ const alertCard = (array) => {
   console.table(array[5], array[6], array[7], array[8], array[9]);
   console.table(array[10], array[11], array[12], array[13], array[14]);
 };
+
 playBingo();
